@@ -1,0 +1,45 @@
+{
+  "name": "realtime-tracking-server",
+  "version": "1.0.0",
+  "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "nodemon index.js",
+    "start": "babel-node app.js"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.19.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.0",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "socket.io": "^2.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://victor-gesit@bitbucket.org/victor-gesit/realtime-tracking-server.git"
+  },
+  "keywords": [
+    "Google",
+    "Maps",
+    "Real",
+    "Time"
+  ],
+  "author": "Victor Idongesit",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/victor-gesit/realtime-tracking-server#readme"
+}
