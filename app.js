@@ -3,40 +3,35 @@ import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import logger from 'morgan';
+import mongoose from 'mongoose';
 import path from 'path';
-import SocketIO from 'socket.io';
-
+import {} from 'dotenv/config';
 
 import routes from './routes';
-import utils from './utils';
+import socketServer from './socketServer';
+
+const mongoDB = process.env.DB_URL;
+
+mongoose.connect(mongoDB).then(() => {
+  console.log('Database connection successful');
+})
+  .catch((err) => {
+    console.log('Database connection failed.', err);
+  });
+
+const db = mongoose.connection;
+db.on('error', () => {
+  console.log('Error occured');
+});
 
 const port = process.env.PORT || 4000;
 const app = express();
 const httpServer = http.Server(app);
-const io = SocketIO(httpServer);
 
+socketServer(httpServer, app);
 app.use(cors());
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, './public/index.html'));
-});
-
-io.on('connection', (socket) => {
-  const { token } = socket.handshake.query;
-  utils.verifyToken(token, (err, decoded) => {
-    if (err) {
-      socket.disconnect();
-    }
-  });
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-  socket.on('hi', () => {
-    console.log('Hi is said');
-  });
-  socket.on('chat message', (data) => {
-    io.emit('chat message', data);
-    console.log('Message received', data);
-  });
 });
 
 app.use(bodyParser.json());
